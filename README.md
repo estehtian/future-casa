@@ -1,0 +1,2 @@
+# future-casa
+PROPERTI
