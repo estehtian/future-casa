@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110f">
+  <meta name="description" content="FUTURE CASA — hunian masa depan dengan arsitektur modern, teknologi cerdas, dan kenyamanan berkelanjutan.">
+  <title>FUTURE CASA — The Future of Living</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#07110f;--panel:#0d1a17;--text:#f2f5ef;--muted:#a4b2aa;--line:rgba(211,235,220,.14);--mint:#a8f0c6;--lime:#d5f58c}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 48px));margin:auto}
+    header{position:absolute;z-index:5;top:0;left:0;width:100%;border-bottom:1px solid rgba(255,255,255,.1)}.nav{height:82px;display:flex;align-items:center;justify-content:space-between}.brand{font:800 19px Manrope,sans-serif;letter-spacing:.16em}.brand span{color:var(--mint)}.links{display:flex;gap:30px;color:#d1dbd3;font-size:13px}.links a:hover{color:var(--mint)}.nav-cta{border:1px solid rgba(168,240,198,.55);padding:11px 17px;border-radius:3px;font-size:12px;letter-spacing:.08em}
+    .hero{min-height:760px;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(4,13,11,.95) 0%,rgba(4,13,11,.78) 43%,rgba(4,13,11,.16) 100%),linear-gradient(0deg,#07110f 0%,transparent 35%),url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=85") center/cover}
+    .hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 75% 45%,rgba(168,240,198,.13),transparent 32%);pointer-events:none}.hero-content{position:relative;z-index:1;padding-top:95px;max-width:690px}.eyebrow{color:var(--mint);font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:700}.hero h1{font:500 clamp(48px,7vw,88px)/1.04 Manrope,sans-serif;letter-spacing:-.055em;margin:24px 0}.hero h1 em{font-style:normal;color:var(--mint)}.hero p{color:#c0ccc4;max-width:490px;line-height:1.8;font-size:15px}.actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 21px;font-size:12px;font-weight:700;letter-spacing:.08em;border:1px solid var(--mint);transition:.25s}.btn.primary{background:var(--mint);color:#08130f}.btn:hover{transform:translateY(-3px);box-shadow:0 10px 35px #a8f0c633}.btn.ghost{color:var(--text);border-color:#ffffff55}
+    .hero-note{position:absolute;z-index:2;right:max(24px,calc((100vw - 1160px)/2));bottom:65px;color:#d7e4db;font-size:10px;letter-spacing:.2em;text-transform:uppercase;writing-mode:vertical-rl}
+    .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#091511}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr)}.stat{padding:27px 34px;border-right:1px solid var(--line)}.stat:first-child{padding-left:0}.stat:last-child{border:0}.stat strong{display:block;font:600 27px Manrope;color:var(--mint)}.stat span{color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+    section{padding:105px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:42px}.kicker{color:var(--mint);font-size:10px;letter-spacing:.24em;text-transform:uppercase}.section-head h2{font:500 clamp(32px,4vw,51px)/1.15 Manrope;margin:14px 0 0;letter-spacing:-.04em}.section-head p{max-width:380px;color:var(--muted);line-height:1.8;font-size:13px}
+    .feature-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px}.feature{min-height:290px;position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line)}.feature img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;opacity:.63;transition:transform .7s}.feature:hover img{transform:scale(1.06)}.feature:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,12,10,.95),transparent 70%)}.feature-copy{position:absolute;z-index:1;bottom:25px;left:25px;right:25px}.feature small{color:var(--mint);letter-spacing:.2em;font-size:9px}.feature h3{font:600 22px Manrope;margin:9px 0}.feature p{font-size:12px;color:#bdc9c1;line-height:1.6;margin:0}
+    .manifesto{background:#0b1814;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.manifesto-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}.manifesto img{width:100%;height:440px;object-fit:cover}.manifesto h2{font:500 clamp(34px,4vw,53px)/1.14 Manrope;letter-spacing:-.04em;margin:15px 0 22px}.manifesto p{color:var(--muted);font-size:14px;line-height:1.9}.text-link{display:inline-block;color:var(--mint);font-size:12px;letter-spacing:.12em;margin-top:18px}
+    .contact{padding:78px 0;background:linear-gradient(110deg,#13251d,#0b1713)}.contact-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}.contact h2{font:500 clamp(30px,4vw,48px) Manrope;margin:12px 0}.contact p{color:var(--muted);font-size:13px}
+    footer{padding:30px 0;color:#83948a;font-size:11px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-brand{color:var(--text);font:800 14px Manrope;letter-spacing:.15em}
+    @media(max-width:760px){.links{display:none}.hero{min-height:700px;background-position:58% center}.hero-content{padding-top:80px}.stats-grid{grid-template-columns:1fr}.stat,.stat:first-child{padding:18px 0;border-right:0;border-bottom:1px solid var(--line)}.stat:last-child{border:0}.section-head,.contact-inner{display:block}.feature-grid{grid-template-columns:1fr}.feature{min-height:260px}.manifesto-grid{grid-template-columns:1fr;gap:30px}.manifesto img{height:300px}section{padding:75px 0}.hero-note{display:none}.contact .btn{margin-top:18px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home">FUTURE<span>CASA</span></a>
+      <nav class="links" aria-label="Navigasi utama"><a href="#vision">Visi</a><a href="#spaces">Konsep</a><a href="#about">Tentang</a><a href="#contact">Kontak</a></nav>
+      <a class="nav-cta" href="#contact">MULAI EKSPLORASI ↗</a>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-content">
+        <div class="eyebrow">Architecture · Technology · Lifestyle</div>
+        <h1>The Future<br>of <em>Living.</em></h1>
+        <p>Menghadirkan cara hidup yang lebih cerdas melalui arsitektur modern, teknologi terintegrasi, dan desain yang selaras dengan alam.</p>
+        <div class="actions"><a class="btn primary" href="#spaces">JELAJAHI KONSEP ↗</a><a class="btn ghost" href="#vision">TEMUKAN VISI KAMI</a></div>
+      </div>
+      <div class="hero-note">Designed for tomorrow — Est. 2050</div>
+    </section>
+    <div class="stats" id="vision"><div class="wrap stats-grid">
+      <div class="stat"><strong>01 / SMART</strong><span>Teknologi hunian cerdas</span></div>
+      <div class="stat"><strong>02 / GREEN</strong><span>Desain berkelanjutan</span></div>
+      <div class="stat"><strong>03 / HUMAN</strong><span>Kenyamanan berpusat pada manusia</span></div>
+    </div></div>
+    <section id="spaces">
+      <div class="wrap">
+        <div class="section-head"><div><div class="kicker">A new perspective</div><h2>Ruang hidup,<br>tanpa batas.</h2></div><p>Setiap ruang dirancang untuk mendukung kehidupan yang terus berkembang — fungsional, tenang, dan penuh kemungkinan.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85" alt="Interior rumah modern dengan pencahayaan alami"><div class="feature-copy"><small>01 — RESIDENTIAL</small><h3>Modern Residences</h3><p>Hunian dengan karakter arsitektur yang kuat dan nyaman.</p></div></article>
+          <article class="feature"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85" alt="Interior minimalis modern"><div class="feature-copy"><small>02 — INTERIOR</small><h3>Intentional Spaces</h3><p>Detail yang sederhana, pengalaman yang bermakna.</p></div></article>
+          <article class="feature"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=85" alt="Arsitektur rumah kontemporer"><div class="feature-copy"><small>03 — INNOVATION</small><h3>Smart Living</h3><p>Teknologi yang menyatu dengan keseharian.</p></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="manifesto" id="about"><div class="wrap manifesto-grid">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85" alt="Rumah kontemporer dikelilingi lanskap hijau">
+      <div><div class="kicker">Our philosophy</div><h2>Tomorrow begins with how we live today.</h2><p>FUTURE CASA adalah konsep ruang hidup masa depan. Kami percaya rumah bukan sekadar bangunan, tetapi ekosistem yang menghubungkan manusia, teknologi, dan lingkungan secara harmonis.</p><p>Mulai dari ide arsitektur hingga pengalaman hunian, setiap kemungkinan dibangun dengan visi jangka panjang.</p><a class="text-link" href="#contact">BANGUN MASA DEPAN BERSAMA ↗</a></div>
+    </div></section>
+    <section class="contact" id="contact"><div class="wrap contact-inner">
+      <div><div class="kicker">Your future starts here</div><h2>Let’s create what’s next.</h2><p>Hubungi tim FUTURE CASA untuk menjajaki kolaborasi dan peluang.</p></div>
+      <a class="btn primary" href="mailto:hello@futurecasa.com?subject=FUTURE%20CASA%20Inquiry">HUBUNGI KAMI ↗</a>
+    </div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><div class="footer-brand">FUTURE CASA</div><div>© <span id="year"></span> FUTURE CASA. THE FUTURE OF LIVING.</div><div>Architecture · Technology · Lifestyle</div></div></footer>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
