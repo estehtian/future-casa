@@ -1,0 +1,55 @@
+
+/* Expanded collection controls and detail layouts */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.catalog-tools{display:grid;grid-template-columns:minmax(230px,1.3fr) minmax(250px,1fr);gap:18px;align-items:center;margin-bottom:20px}
+.catalog-selects{display:flex;justify-content:flex-end;gap:10px;grid-column:1/-1}
+.catalog-selects label{display:flex;align-items:center;gap:8px;color:#718079;border-bottom:1px solid #bdc9c1;padding:8px 0}
+.catalog-selects select{border:0;background:transparent;color:#20352c;min-width:150px;padding:4px;font-size:12px}
+.catalog-tools .search-box{max-width:none}
+.result-count{font-size:11px;color:#78857e;letter-spacing:.04em;margin:16px 0}
+.property-card-main{display:block;color:inherit}
+.property-bottom a{display:grid;place-items:center;width:36px;height:36px;border:1px solid #dce1dc;border-radius:50%;transition:background .2s,color .2s}
+.property-bottom a:hover{background:#122d26;color:white}
+.empty-state{padding:60px 24px;text-align:center;border:1px dashed #bdc9c1;color:#66736c}
+.empty-state h2{color:#1b2b24;font:600 26px Manrope,sans-serif}
+.empty-state .button{margin-top:16px}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:9%;align-items:start}
+.contact-grid .contact-aside h2{font:500 clamp(38px,5vw,58px)/1.08 Manrope,sans-serif;letter-spacing:-.05em;margin:24px 0}
+.contact-grid .contact-aside h2 em,.detail-note h2 em{font-family:Georgia,serif;font-weight:400}
+.contact-grid .contact-aside>p,.detail-copy>p{color:#748078;line-height:1.8;max-width:450px}
+.contact-detail{display:flex;gap:15px;align-items:center;margin:24px 0;color:#438c73}
+.contact-detail>div{display:grid;gap:4px;color:#26342e}
+.contact-detail b{font-size:12px}.contact-detail span,.contact-detail a{font-size:12px;color:#748078}
+.contact-aside>.button{margin-top:12px}
+.contact-form{display:flex;flex-direction:column;gap:20px;padding:32px;background:rgba(255,255,255,.62);border:1px solid rgba(31,77,59,.12)}
+.contact-form label{display:flex;flex-direction:column;gap:9px;color:#56645b;font-size:11px;font-weight:700}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;border:0;border-bottom:1px solid #bdc8bf;background:transparent;padding:12px 0;color:#18251e;font:400 13px 'DM Sans',sans-serif;outline:none}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:#398b69}
+.contact-form textarea{resize:vertical;min-height:120px}
+.form-footer{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.form-footer small{color:#78857e;font-size:10px;line-height:1.6}
+.form-status{min-height:18px;margin:0;color:#237b5b;font-size:12px}
+.detail-page{padding:56px 0 100px;background:#f4f5f1}
+.detail-back{margin-bottom:30px}
+.detail-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:6%;align-items:center}
+.detail-image{position:relative;min-height:550px;overflow:hidden;background:#dce2dc}
+.detail-image img,.article-cover img{object-fit:cover}
+.detail-image .property-tag{left:18px;right:auto}
+.detail-copy h1{font:600 clamp(38px,5vw,66px)/1.04 Manrope,sans-serif;letter-spacing:-.055em;margin:22px 0}
+.detail-location{display:flex;align-items:center;gap:8px;color:#438c73}
+.detail-price{display:block;font:700 22px Manrope,sans-serif;margin:26px 0 18px}
+.detail-specs{margin-bottom:28px}
+.detail-note{max-width:660px;margin:100px auto 0;text-align:center}
+.detail-note h2{font:500 clamp(32px,5vw,54px)/1.1 Manrope,sans-serif;letter-spacing:-.04em}
+.detail-note p{color:#748078;line-height:1.8}
+.article-header{max-width:850px;margin:40px auto}
+.article-header h1{font:600 clamp(38px,7vw,78px)/1.05 Manrope,sans-serif;letter-spacing:-.055em;color:#15231d}
+.article-read{display:flex;align-items:center;gap:8px;color:#748078;font-size:12px}
+.article-cover{position:relative;height:min(58vw,580px);min-height:280px;overflow:hidden;background:#dce2dc}
+.article-cover img{object-fit:cover}
+.article-body{max-width:700px;margin:65px auto;color:#58665e;line-height:1.9}
+.article-body h2{margin-top:38px;color:#1b2b24;font:600 27px Manrope,sans-serif}
+.article-body .article-lead{font-size:19px;color:#33453b}
+.article-body .text-link{margin-top:20px}
+@media(max-width:800px){.catalog-tools{grid-template-columns:1fr}.catalog-selects{grid-column:auto;justify-content:flex-start;flex-wrap:wrap}.contact-grid,.detail-hero{grid-template-columns:1fr;gap:38px}.detail-image{min-height:360px}.detail-note{margin-top:65px}.contact-form{padding:24px}}
+@media(max-width:500px){.catalog-selects{flex-direction:column;align-items:stretch}.catalog-selects select{width:100%}.detail-image{min-height:280px}.article-body{margin:40px auto}}
