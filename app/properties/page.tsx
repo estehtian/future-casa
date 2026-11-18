@@ -1,61 +1,66 @@
 "use client";
+
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import PropertyCard from "@/components/PropertyCard";
 import { properties } from "@/lib/data";
 
+type Category = "Semua" | "Residence" | "Villa" | "Commercial";
+const categories: Category[] = ["Semua", "Residence", "Villa", "Commercial"];
+
+function priceInMillions(label: string) {
+  const match = label.match(/([\d.,]+)\s*M/i);
+  if (!match) return Number.POSITIVE_INFINITY;
+  return Number(match[1].replace(/\./g, "").replace(",", "."));
+}
+
 export default function PropertiesPage() {
-  const [query,setQuery] = useState("");
-  const [category,setCategory] = useState("Semua");
-  const filtered = useMemo(()=>properties.filter(p=>(category==="Semua"||p.category===category)&&`${p.name} ${p.location} ${p.description}`.toLowerCase().includes(query.toLowerCase())),[query,category]);
-  return <><section className="page-hero"><div className="container"><div className="eyebrow"><span className="eyebrow-dot"/> CURATED PROPERTY COLLECTION</div><h1>Find your<br/><em>kind of space.</em></h1><p>Temukan ruang yang sesuai dengan kebutuhan, karakter, dan rencana masa depan Anda.</p></div></section><section className="section-pad"><div className="container"><div className="catalog-tools"><div className="search-box"><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Cari nama atau lokasi properti..." aria-label="Cari properti"/></div><div className="filter-pills">{["Semua","Residence","Villa","Commercial"].map(c=><button key={c} className={category===c?"active":""} onClick={()=>setCategory(c)}>{c}</button>)}</div></div><p className="result-count">{filtered.length} PROPERTI DITEMUKAN</p>{filtered.length>0?<div className="property-grid">{filtered.map(item=><PropertyCard key={item.id} item={item}/>)}</div>:<div className="empty-state">Tidak ada properti yang cocok. Coba kata kunci atau kategori lain.</div>}</div></section></>;
-}
-import Link from "next/link";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, Clock3 } from "lucide-react";
-import { articles } from "@/lib/data";
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<Category>("Semua");
+  const [minimumBeds, setMinimumBeds] = useState(0);
+  const [sort, setSort] = useState("featured");
 
-const slugify = (title: string) => title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-type ArticleDetailProps = { params: Promise<{ slug: string }> };
+  const filtered = useMemo(() => {
+    const term = query.trim().toLocaleLowerCase("id");
+    const results = properties.filter((property) => {
+      const searchable = `${property.name} ${property.location} ${property.description} ${property.tag}`.toLocaleLowerCase("id");
+      return (category === "Semua" || property.category === category)
+        && searchable.includes(term)
+        && property.beds >= minimumBeds;
+    });
 
-export function generateStaticParams() {
-  return articles.map((article) => ({ slug: slugify(article.title) }));
-}
+    if (sort === "name") results.sort((a, b) => a.name.localeCompare(b.name, "id"));
+    if (sort === "location") results.sort((a, b) => a.location.localeCompare(b.location, "id"));
+    if (sort === "price") results.sort((a, b) => priceInMillions(a.price) - priceInMillions(b.price));
+    return results;
+  }, [category, minimumBeds, query, sort]);
 
-export async function generateMetadata({ params }: ArticleDetailProps) {
-  const { slug } = await params;
-  const article = articles.find((item) => slugify(item.title) === slug);
-  return article
-    ? { title: article.title, description: `${article.category}: ${article.title}` }
-    : { title: "Artikel tidak ditemukan" };
-}
+  function resetFilters() {
+    setQuery("");
+    setCategory("Semua");
+    setMinimumBeds(0);
+    setSort("featured");
+  }
 
-export default async function ArticleDetailPage({ params }: ArticleDetailProps) {
-  const { slug } = await params;
-  const article = articles.find((item) => slugify(item.title) === slug);
-  if (!article) notFound();
-
-  return (
-    <article className="detail-page journal-detail">
-      <div className="container">
-        <Link className="text-link detail-back" href="/journal"><ArrowLeft size={16}/> Kembali ke jurnal</Link>
-        <header className="article-header">
-          <div className="eyebrow"><span className="eyebrow-dot"/> {article.category} / {article.date}</div>
-          <h1>{article.title}</h1>
-          <span className="article-read"><Clock3 size={15}/> {article.read} membaca</span>
-        </header>
-        <div className="article-cover"><Image src={article.image} alt={article.title} fill priority sizes="(max-width: 800px) 100vw, 1180px" /></div>
-        <div className="article-body">
-          <p className="article-lead">Ruang yang baik selalu dimulai dari pemahaman tentang manusia yang menggunakannya. Dari sana, desain, teknologi, dan detail sehari-hari dapat bekerja bersama menciptakan pengalaman hidup yang lebih bermakna.</p>
-          <h2>Desain yang berangkat dari kehidupan</h2>
-          <p>Setiap keputusan tentang ruang membawa dampak pada cara kita beristirahat, bekerja, dan terhubung dengan orang lain. Karena itu, pendekatan FUTURE CASA memadukan kebutuhan nyata penghuni dengan desain yang relevan untuk masa depan.</p>
-          <h2>Teknologi yang terasa alami</h2>
-          <p>Teknologi terbaik bukan sekadar terlihat canggih. Teknologi seharusnya hadir dengan sederhana, membantu aktivitas sehari-hari, menjaga kenyamanan, dan memberi ruang bagi penghuninya untuk fokus pada hal yang penting.</p>
-          <p>Dengan perencanaan yang matang, ruang dapat terus berkembang bersama penghuninya—lebih fleksibel, efisien, dan personal dari waktu ke waktu.</p>
-          <Link className="text-link" href="/contact">Diskusikan kebutuhan ruang Anda <ArrowUpRight size={16}/></Link>
+  return <>
+    <section className="page-hero"><div className="container">
+      <div className="eyebrow"><span className="eyebrow-dot"/> CURATED PROPERTY COLLECTION</div>
+      <h1>Find your<br/><em>kind of space.</em></h1>
+      <p>Temukan ruang pilihan yang dirancang untuk menemani cara hidup Anda berikutnya.</p>
+    </div></section>
+    <section className="section-pad"><div className="container">
+      <div className="catalog-tools">
+        <label className="search-box"><Search size={17} aria-hidden="true"/><span className="sr-only">Cari properti</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Cari nama, lokasi, atau kata kunci" /></label>
+        <div className="filter-pills" role="group" aria-label="Filter kategori">
+          {categories.map((item) => <button key={item} type="button" className={category === item ? "active" : ""} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
+        </div>
+        <div className="catalog-selects">
+          <label><SlidersHorizontal size={15} aria-hidden="true"/><span className="sr-only">Jumlah kamar tidur</span><select value={minimumBeds} onChange={(event) => setMinimumBeds(Number(event.target.value))}><option value={0}>Semua jumlah kamar</option><option value={2}>Minimal 2 kamar</option><option value={3}>Minimal 3 kamar</option><option value={4}>Minimal 4 kamar</option></select></label>
+          <label><span className="sr-only">Urutkan properti</span><select value={sort} onChange={(event) => setSort(event.target.value)}><option value="featured">Pilihan kurasi</option><option value="name">Nama A–Z</option><option value="location">Lokasi</option><option value="price">Harga terendah</option></select></label>
         </div>
       </div>
-    </article>
-  );
+      <p className="result-count" aria-live="polite">Menampilkan {filtered.length} dari {properties.length} properti</p>
+      {filtered.length > 0 ? <div className="property-grid">{filtered.map((item) => <PropertyCard key={item.id} item={item}/>)}</div> : <div className="empty-state"><h2>Belum menemukan ruang yang cocok?</h2><p>Ubah kata pencarian atau sesuaikan filter untuk melihat koleksi lainnya.</p><button className="button button-primary" type="button" onClick={resetFilters}>Hapus semua filter</button></div>}
+    </div></section>
+  </>;
 }
